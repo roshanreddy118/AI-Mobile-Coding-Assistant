@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: mobile-coding-assistant
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false
+      - key: OPENROUTER_API_KEY
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: DEFAULT_LLM_PROVIDER
+        value: groq
+      - key: OPENROUTER_MODEL
+        value: google/gemma-4-31b-it:free
+      - key: PYTHON_VERSION
+        value: 3.13.2
