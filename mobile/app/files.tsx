@@ -58,6 +58,9 @@ export default function FilesScreen() {
           <Ionicons name="arrow-up" size={18} color="#00ffc8" />
         </TouchableOpacity>
         <Text style={styles.pathText}>/{currentPath === "." ? "" : currentPath}</Text>
+        <TouchableOpacity onPress={loadFiles} style={{ marginLeft: "auto", padding: 6 }}>
+          <Ionicons name="refresh" size={20} color="#00ffc8" />
+        </TouchableOpacity>
       </View>
 
       {viewingFile ? (
