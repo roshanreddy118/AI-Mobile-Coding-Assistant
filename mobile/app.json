@@ -25,6 +25,11 @@
       "expo-router",
       "expo-asset",
       "expo-font"
-    ]
+    ],
+    "web": {
+      "bundler": "metro",
+      "output": "single",
+      "favicon": "./assets/favicon.svg"
+    }
   }
 }
