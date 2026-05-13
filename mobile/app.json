@@ -1,0 +1,29 @@
+{
+  "expo": {
+    "name": "Mobile Coding Assistant",
+    "slug": "mobile-coding-assistant",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "mobile-coding-assistant",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSMicrophoneUsageDescription": "Needed for voice commands to control coding assistant"
+      }
+    },
+    "android": {
+      "permissions": [
+        "RECORD_AUDIO"
+      ]
+    },
+    "plugins": [
+      "expo-router",
+      "expo-asset"
+    ]
+  }
+}
