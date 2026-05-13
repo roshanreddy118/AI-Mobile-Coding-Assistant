@@ -89,15 +89,14 @@ export default function HomeScreen() {
   // Voice command
   const handleVoice = async () => {
     if (isRecording) {
-      const uri = await stopRecording();
-      if (!uri || !sessionId) return;
+      const transcript = await stopRecording();
+      if (!transcript || !sessionId) return;
 
-      addMessage("user", "🎤 (voice command)");
+      addMessage("user", `🎤 "${transcript}"`);
       setIsLoading(true);
 
       try {
-        const resp = await api.sendVoice(sessionId, uri, provider);
-        addMessage("user", `🎤 "${resp.transcript}"`);
+        const resp = await api.sendCommand(sessionId, transcript, provider);
         const summary = formatResponse(resp);
         addMessage("assistant", summary, resp.results, resp.preview_url);
       } catch (e: any) {
@@ -106,7 +105,11 @@ export default function HomeScreen() {
         setIsLoading(false);
       }
     } else {
-      await startRecording();
+      try {
+        await startRecording();
+      } catch (e: any) {
+        addMessage("assistant", `❌ ${e.message}`);
+      }
     }
   };
 
