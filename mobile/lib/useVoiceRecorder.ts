@@ -1,14 +1,22 @@
-// Voice recording hook using expo-av
+// Voice recording hook using expo-av (native only, no-op on web)
 import { useState, useRef } from "react";
-import { Audio } from "expo-av";
+import { Platform } from "react-native";
+
+let Audio: any = null;
+if (Platform.OS !== "web") {
+  Audio = require("expo-av").Audio;
+}
 
 export function useVoiceRecorder() {
   const [isRecording, setIsRecording] = useState(false);
   const [recordingDuration, setRecordingDuration] = useState(0);
-  const recordingRef = useRef<Audio.Recording | null>(null);
+  const recordingRef = useRef<any>(null);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const startRecording = async () => {
+    if (Platform.OS === "web") {
+      throw new Error("Voice recording is not supported on web");
+    }
     try {
       const permission = await Audio.requestPermissionsAsync();
       if (!permission.granted) {
